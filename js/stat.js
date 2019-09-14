@@ -4,11 +4,11 @@ var CLOUD_WIDTH = 420;
 var CLOUD_HEIGHT = 270;
 var CLOUD_X = 100;
 var CLOUD_Y = 10;
-var TEXT_INDENT_X = 130;
-var TEXT_INDENT_Y = 30;
+var TEXT_INDENT_X = 160;
+var TEXT_INDENT_Y = 15;
 var FONT_SIZE = 16;
-var LINE_HEIGHT = FONT_SIZE + 10;
-var HISTOGRAM_POSITION_Y = 90;
+var LINE_HEIGHT = FONT_SIZE + 2;
+var HISTOGRAM_POSITION_Y = 100;
 var HISTOGRAM_MAX_HEIGHT = 150;
 var HISTOGRAM_WIDTH = 40;
 var HISTOGRAM_GAP = 50;
@@ -21,7 +21,7 @@ var getRandomNumber = function (minNumber, maxNumber) {
 
 var getMaxValueArr = function (arr) {
   var maxValue = arr[0];
-  for (var i = 1; i < arr.length - 1; i++) {
+  for (var i = 1; i <= arr.length - 1; i++) {
     arr[i] = arr[i];
     if (maxValue < arr[i]) {
       maxValue = arr[i];
@@ -42,16 +42,19 @@ var renderWinRect = function (ctx) {
   ctx.fillRect(CLOUD_X, CLOUD_Y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
 
-var renderWinCloud = function (ctx, color) {
-
+var renderWinCloud = function (ctx, colorStroke, colorFill) {
+  beginPath();
+  closePath();
 };
 
-var renderHistogram = function (ctx, name, coeff, color, height) {
+var renderHistogram = function (ctx, name, coeff, color, height, time) {
   var histogramX = TEXT_INDENT_X + coeff * (HISTOGRAM_WIDTH + HISTOGRAM_GAP);
   var histogramY = HISTOGRAM_POSITION_Y + HISTOGRAM_MAX_HEIGHT - height;
   var histogramTextY = HISTOGRAM_POSITION_Y + HISTOGRAM_MAX_HEIGHT + LINE_HEIGHT;
+  var histogramTimeY = HISTOGRAM_POSITION_Y + HISTOGRAM_MAX_HEIGHT - height - 5;
   ctx.fillStyle = 'black';
   ctx.fillText(name, histogramX, histogramTextY);
+  ctx.fillText(time, histogramX, histogramTimeY);
 
   ctx.fillStyle = color;
   ctx.fillRect(histogramX, histogramY, HISTOGRAM_WIDTH, height);
@@ -67,6 +70,7 @@ window.renderStatistics = function (ctx, names, times) {
   var color = 'yellow';
   var maxTime = Math.floor(getMaxValueArr(times));
   var currentHeight = 0;
+  var currentTime = 0;
 
   renderWinRect(ctx);
   renderWinMessage(ctx, 'Ура вы победили!', 0);
@@ -76,6 +80,7 @@ window.renderStatistics = function (ctx, names, times) {
     color = (names[i] === 'Вы') ? 'rgba(255, 0, 0, 1)' : getColorSaturate(240);
     currentHeight = times[i] * HISTOGRAM_MAX_HEIGHT / maxTime;
     currentHeight = Math.round(currentHeight);
-    renderHistogram(ctx, names[i], i, color, currentHeight);
+    currentTime = Math.floor(times[i]);
+    renderHistogram(ctx, names[i], i, color, currentHeight, currentTime);
   }
 };
