@@ -7,7 +7,7 @@ var CLOUD_Y = 10;
 var TEXT_INDENT_X = 160;
 var TEXT_INDENT_Y = 15;
 var FONT_SIZE = 16;
-var LINE_HEIGHT = FONT_SIZE + 2;
+var LINE_HEIGHT = FONT_SIZE + 5;
 var HISTOGRAM_POSITION_Y = 100;
 var HISTOGRAM_MAX_HEIGHT = 150;
 var HISTOGRAM_WIDTH = 40;
@@ -37,14 +37,11 @@ var renderWinMessage = function (ctx, line, startY) {
   ctx.fillText(line, TEXT_INDENT_X, positionY);
 };
 
-var renderWinRect = function (ctx) {
-  ctx.fillStyle = 'white';
-  ctx.fillRect(CLOUD_X, CLOUD_Y, CLOUD_WIDTH, CLOUD_HEIGHT);
-};
-
-var renderWinCloud = function (ctx, colorStroke, colorFill) {
-  beginPath();
-  closePath();
+var renderWinRect = function (ctx, positionX, positionY, color) {
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+  ctx.fillRect(positionX + 10, positionY + 10, CLOUD_WIDTH, CLOUD_HEIGHT);
+  ctx.fillStyle = color;
+  ctx.fillRect(positionX, positionY, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
 
 var renderHistogram = function (ctx, name, coeff, color, height, time) {
@@ -72,7 +69,7 @@ window.renderStatistics = function (ctx, names, times) {
   var currentHeight = 0;
   var currentTime = 0;
 
-  renderWinRect(ctx);
+  renderWinRect(ctx, CLOUD_X, CLOUD_Y, 'white');
   renderWinMessage(ctx, 'Ура вы победили!', 0);
   renderWinMessage(ctx, 'Список результатов:', LINE_HEIGHT);
 
