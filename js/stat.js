@@ -30,17 +30,6 @@ var getMaxValueArr = function (arr) {
   return maxValue;
 };
 
-var getMinValueArr = function (arr) {
-  var minValue = arr[0];
-  for (var i = 1; i < arr.length - 1; i++) {
-    arr[i] = arr[i];
-    if (minValue > arr[i]) {
-      minValue = arr[i];
-    }
-  }
-  return minValue;
-};
-
 var renderWinMessage = function (ctx, line, startY) {
   var positionY = TEXT_INDENT_Y + FONT_SIZE + startY;
   ctx.fillStyle = 'black';
@@ -51,6 +40,10 @@ var renderWinMessage = function (ctx, line, startY) {
 var renderWinRect = function (ctx) {
   ctx.fillStyle = 'white';
   ctx.fillRect(CLOUD_X, CLOUD_Y, CLOUD_WIDTH, CLOUD_HEIGHT);
+};
+
+var renderWinCloud = function (ctx, color) {
+
 };
 
 var renderHistogram = function (ctx, name, coeff, color, height) {
@@ -69,12 +62,7 @@ var getColorSaturate = function (hue) {
   var color = 'hsl(' + hue + ', ' + saturate + '%, 50%)';
   return color;
 };
-/*
-var getHistogramHeight = function (ctx, arr) {
-  var maxValue = Math.round(getMaxValueArr(arr));
-  var histogramHeight = Math.round(arr[i]) * HISTOGRAM_MAX_HEIGHT / maxValue;
-}
-*/
+
 window.renderStatistics = function (ctx, names, times) {
   var color = 'yellow';
   var maxTime = Math.floor(getMaxValueArr(times));
@@ -84,7 +72,7 @@ window.renderStatistics = function (ctx, names, times) {
   renderWinMessage(ctx, 'Ура вы победили!', 0);
   renderWinMessage(ctx, 'Список результатов:', LINE_HEIGHT);
 
-  for (var i = 0; i < names.length - 1; i++) {
+  for (var i = 0; i <= names.length - 1; i++) {
     color = (names[i] === 'Вы') ? 'rgba(255, 0, 0, 1)' : getColorSaturate(240);
     currentHeight = times[i] * HISTOGRAM_MAX_HEIGHT / maxTime;
     currentHeight = Math.round(currentHeight);
