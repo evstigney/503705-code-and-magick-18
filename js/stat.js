@@ -21,8 +21,7 @@ var getRandomNumber = function (minNumber, maxNumber) {
 
 var getMaxValueArr = function (arr) {
   var maxValue = arr[0];
-  for (var i = 1; i <= arr.length - 1; i++) {
-    arr[i] = arr[i];
+  for (var i = 1; i < arr.length; i++) {
     if (maxValue < arr[i]) {
       maxValue = arr[i];
     }
@@ -48,7 +47,7 @@ var renderHistogram = function (ctx, name, coeff, color, height, time) {
   var histogramX = TEXT_INDENT_X + coeff * (HISTOGRAM_WIDTH + HISTOGRAM_GAP);
   var histogramY = HISTOGRAM_POSITION_Y + HISTOGRAM_MAX_HEIGHT - height;
   var histogramTextY = HISTOGRAM_POSITION_Y + HISTOGRAM_MAX_HEIGHT + LINE_HEIGHT;
-  var histogramTimeY = HISTOGRAM_POSITION_Y + HISTOGRAM_MAX_HEIGHT - height - 5;
+  var histogramTimeY = HISTOGRAM_POSITION_Y + HISTOGRAM_MAX_HEIGHT - height - FONT_SIZE;
   ctx.fillStyle = 'black';
   ctx.fillText(name, histogramX, histogramTextY);
   ctx.fillText(time, histogramX, histogramTimeY);
@@ -73,7 +72,7 @@ window.renderStatistics = function (ctx, names, times) {
   renderWinMessage(ctx, 'Ура вы победили!', 0);
   renderWinMessage(ctx, 'Список результатов:', LINE_HEIGHT);
 
-  for (var i = 0; i <= names.length - 1; i++) {
+  for (var i = 0; i < names.length; i++) {
     color = (names[i] === 'Вы') ? 'rgba(255, 0, 0, 1)' : getColorSaturate(240);
     currentHeight = times[i] * HISTOGRAM_MAX_HEIGHT / maxTime;
     currentHeight = Math.round(currentHeight);
