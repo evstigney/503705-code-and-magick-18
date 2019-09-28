@@ -87,7 +87,7 @@ var changeSetupColor = function (arr, color) {
   var index = 1;
   for (var i = 0; i < arr.length; i++) {
     if (currentColor === arr[i]) {
-      index = (i === arr.length - 1) ? 0 : i + 1;
+      index = (i + 1) % arr.length;
     }
   }
   currentColor = arr[index];
