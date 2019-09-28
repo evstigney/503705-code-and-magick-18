@@ -12,6 +12,8 @@ var setupWizardEyes = setupWindow.querySelector('.setup-wizard .wizard-eyes');
 var setupWizardEyesValue = setupWindow.querySelector('input[name="eyes-color"]');
 var setupWizardFireball = setupWindow.querySelector('.setup-fireball-wrap');
 var setupWizardFireballValue = setupWindow.querySelector('input[name="fireball-color"]');
+var setupButtonSubmit = setupWindow.querySelector('.button .setup-submit');
+var setupWizardForm = setupWindow.querySelector('.setup-wizard-form');
 var similarWizardsList = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 var fragment = document.createDocumentFragment();
@@ -130,6 +132,9 @@ setupClose.addEventListener('keydown', function (evt) {
 document.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ESC_KEYCODE && !setupWindow.classList.contains('hidden') && document.activeElement !== setupUserName) {
     closeSetupWindowHandler();
+  }
+  if (evt.keyCode === ENTER_KEYCODE && document.activeElement === setupButtonSubmit) {
+    setupWizardForm.submit();
   }
 });
 
