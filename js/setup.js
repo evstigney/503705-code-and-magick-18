@@ -118,13 +118,11 @@ setupOpen.addEventListener('keydown', function (evt) {
 });
 
 setupClose.addEventListener('click', function () {
-  if (document.activeElement !== setupUserName) {
-    closeSetupWindowHandler();
-  }
+  closeSetupWindowHandler();
 });
 
 setupClose.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === ENTER_KEYCODE && document.activeElement !== setupUserName && document.activeElement === setupClose) {
+  if (evt.keyCode === ENTER_KEYCODE && document.activeElement === setupClose) {
     closeSetupWindowHandler();
   }
 });
