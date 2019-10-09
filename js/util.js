@@ -21,6 +21,19 @@ window.util = (function () {
     getRandomValue: function (arr) {
       var index = this.getRandomNumber(0, arr.length - 1);
       return arr[index];
+    },
+    cloneObj: function (obj) {
+      var clonedObj = {};
+      if (typeof obj !== 'object') {
+        clonedObj = null;
+      } else {
+        for (var key in obj) {
+          if (key) {
+            clonedObj[key] = obj[key];
+          }
+        }
+      }
+      return clonedObj;
     }
   };
 })();
