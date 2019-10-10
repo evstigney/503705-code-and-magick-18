@@ -66,17 +66,6 @@
     return currentColor;
   };
 
-  var convertRgbToHex = function (rgb) {
-    rgb = rgb.slice(4, -1);
-    rgb = rgb.split(', ');
-    var hex = '#';
-    for (var i = 0; i < rgb.length; i++) {
-      rgb[i] = Number(rgb[i]).toString(16);
-      hex += rgb[i];
-    }
-    return hex;
-  };
-
   renderWizardsInDocument();
 
   setupWizardCoat.addEventListener('click', function (evt) {
@@ -92,7 +81,7 @@
   });
 
   setupWizardFireball.addEventListener('click', function () {
-    var currentColor = convertRgbToHex(setupWizardFireball.style.backgroundColor);
+    var currentColor = window.util.convertRgbToHex(setupWizardFireball.style.backgroundColor);
     var newColor = changeSetupColor(FIREBALL_COLORS_ARR, currentColor);
     var newBackground = 'background: ' + newColor + ';';
     setupWizardFireball.setAttribute('style', newBackground);

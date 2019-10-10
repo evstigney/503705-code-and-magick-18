@@ -34,6 +34,16 @@ window.util = (function () {
         }
       }
       return clonedObj;
+    },
+    convertRgbToHex: function (rgb) {
+      rgb = rgb.slice(4, -1);
+      rgb = rgb.split(', ');
+      var hex = '#';
+      for (var i = 0; i < rgb.length; i++) {
+        rgb[i] = Number(rgb[i]).toString(16);
+        hex += rgb[i];
+      }
+      return hex;
     }
   };
 })();
