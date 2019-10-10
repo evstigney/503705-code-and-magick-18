@@ -44,6 +44,15 @@ window.util = (function () {
         hex += rgb[i];
       }
       return hex;
+    },
+    getMaxValueArr: function (arr) {
+      var maxValue = arr[0];
+      for (var i = 1; i < arr.length; i++) {
+        if (maxValue < arr[i]) {
+          maxValue = arr[i];
+        }
+      }
+      return maxValue;
     }
   };
 })();
