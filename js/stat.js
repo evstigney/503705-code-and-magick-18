@@ -13,22 +13,6 @@ var HISTOGRAM_MAX_HEIGHT = 150;
 var HISTOGRAM_WIDTH = 40;
 var HISTOGRAM_GAP = 50;
 
-var getRandomNumber = function (minNumber, maxNumber) {
-  var min = Math.ceil(minNumber);
-  var max = Math.floor(maxNumber);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
-
-var getMaxValueArr = function (arr) {
-  var maxValue = arr[0];
-  for (var i = 1; i < arr.length; i++) {
-    if (maxValue < arr[i]) {
-      maxValue = arr[i];
-    }
-  }
-  return maxValue;
-};
-
 var renderWinMessage = function (ctx, line, startY) {
   var positionY = TEXT_INDENT_Y + FONT_SIZE + startY;
   ctx.fillStyle = 'black';
@@ -57,14 +41,14 @@ var renderHistogram = function (ctx, name, coeff, color, height, time) {
 };
 
 var getColorSaturate = function (hue) {
-  var saturate = getRandomNumber(1, 100);
+  var saturate = window.util.getRandomNumber(1, 100);
   var color = 'hsl(' + hue + ', ' + saturate + '%, 50%)';
   return color;
 };
 
 window.renderStatistics = function (ctx, names, times) {
   var color = 'yellow';
-  var maxTime = Math.floor(getMaxValueArr(times));
+  var maxTime = Math.floor(window.util.getMaxValueArr(times));
   var currentHeight = 0;
   var currentTime = 0;
 
