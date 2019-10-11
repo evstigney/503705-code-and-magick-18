@@ -28,7 +28,6 @@ window.dialog = (function () {
   var closeSetupWindowHandler = function () {
     setupWindow.classList.add('hidden');
     isOpenForFirstTime = false;
-    return isOpenForFirstTime;
   };
 
   dialogHandle.addEventListener('mousedown', function (evt) {
