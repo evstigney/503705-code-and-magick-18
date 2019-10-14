@@ -101,6 +101,7 @@ window.dialog = (function () {
   });
 
   return {
-    setup: setupWindow
+    setup: setupWindow,
+    setupForm: setupWizardForm
   };
 })();
