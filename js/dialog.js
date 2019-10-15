@@ -12,12 +12,15 @@ window.dialog = (function () {
   var setupWindowStartPosition = {};
 
   var renderWaitBlock = function () {
-    var waitBlock = document.createElement('div');
-    waitBlock.classList.add('wait-block');
-    waitBlock.style = 'padding: 20px; text-align: center;';
-    waitBlock.style.color = 'white';
-    waitBlock.textContent = 'Минуточку, маги готовятся...';
-    setupWindow.querySelector('.setup-footer').insertAdjacentElement('afterbegin', waitBlock);
+    var waitBlock = setupWindow.querySelector('.wait-block');
+    if (!waitBlock) {
+      waitBlock = document.createElement('div');
+      waitBlock.classList.add('wait-block');
+      waitBlock.style = 'padding: 20px; text-align: center;';
+      waitBlock.style.color = 'white';
+      waitBlock.textContent = 'Минуточку, маги готовятся...';
+      setupWindow.querySelector('.setup-footer').insertAdjacentElement('afterbegin', waitBlock);
+    }
   };
 
   var openSetupWindowHandler = function () {
