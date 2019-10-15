@@ -53,6 +53,27 @@ window.util = (function () {
         }
       }
       return maxValue;
-    }
+    },
+    getRandomArr: function (arr, quantity) {
+      var randomArr = [];
+      var flag = true;
+      for (var i = 0; i < quantity; i++) {
+        var currentIndex = this.getRandomNumber(0, arr.length - 1);
+        if (i > 0) {
+          for (var j = 0; j < randomArr.length; j++) {
+            flag = true;
+            if (arr[currentIndex] === randomArr[j] && currentIndex !== j) {
+              flag = false;
+              --i;
+              break;
+            }
+          }
+        }
+        if (flag) {
+          randomArr.push(arr[currentIndex]);
+        }
+      }
+      return randomArr;
+    },
   };
 })();
