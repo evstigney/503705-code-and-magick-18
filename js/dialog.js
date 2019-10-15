@@ -11,8 +11,21 @@ window.dialog = (function () {
   var isOpenForFirstTime = true;
   var setupWindowStartPosition = {};
 
+  var renderWaitBlock = function () {
+    var waitBlock = document.createElement('div');
+    waitBlock.classList.add('wait-block');
+    waitBlock.style = 'padding: 20px; text-align: center;';
+    waitBlock.style.color = 'white';
+    waitBlock.textContent = 'Минуточку, маги готовятся...';
+    setupWindow.querySelector('.setup-footer').insertAdjacentElement('afterbegin', waitBlock);
+  };
+
   var openSetupWindowHandler = function () {
     setupWindow.classList.remove('hidden');
+    var wizard = setupWindow.querySelector('.setup-similar-item');
+    if (!wizard) {
+      renderWaitBlock();
+    }
     var setupWindowPosition = {
       x: setupWindow.offsetLeft,
       y: setupWindow.offsetTop

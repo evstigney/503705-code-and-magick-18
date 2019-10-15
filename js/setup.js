@@ -1,6 +1,6 @@
 'use strict';
 
-(function () {
+window.setup = (function () {
   var setupSimilar = document.querySelector('.setup-similar');
   var setupWizardCoat = window.dialog.setup.querySelector('.setup-wizard .wizard-coat');
   var setupWizardCoatValue = window.dialog.setup.querySelector('input[name="coat-color"]');
@@ -40,6 +40,10 @@
   };
 
   var renderWizardsInDocument = function (data) {
+    var waitBlock = document.querySelector('.setup-footer').querySelector('.wait-block');
+    if (waitBlock) {
+      waitBlock.remove();
+    }
     var wizardsArr = createWizards(data);
     for (var i = 0; i < wizardsArr.length; i++) {
       fragment.appendChild(renderWizard(wizardsArr[i]));
@@ -124,4 +128,7 @@
     window.dialog.setup.classList.add('hidden');
     evt.preventDefault();
   });
+  return {
+    similarWizardsList: similarWizardsList
+  };
 })();
