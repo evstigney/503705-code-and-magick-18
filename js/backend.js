@@ -3,30 +3,21 @@
 window.backend = (function () {
   var URL = 'https://js.dump.academy/code-and-magick';
   var TIMEOUT = 6000;
+  var MAP_ERRORS = {
+    400: 'неверный запрос',
+    401: 'пользователь не авторизован',
+    404: 'ничего не найдено',
+    500: 'внутренняя ошибка сервера'
+  };
 
   var onTimeout = function (action) {
     var string = 'Данные не загрузились за ' + TIMEOUT + ' ms';
     action(string);
   };
 
-  var renderErrorMessage = function (status) {
-    var message = 'Произошла ошибка при загрузке';
-    switch (status) {
-      case 400:
-        message = 'Неверный запрос';
-        break;
-
-      case 401:
-        message = 'Пользователь не авторизован';
-        break;
-
-      case 404:
-        message = 'Ничего не найдено';
-        break;
-
-      case 500:
-        message = 'Внутренняя ошибка сервера';
-    }
+  var getErrorMessage = function (status) {
+    var message = 'Ошибка: ';
+    message += MAP_ERRORS[status];
     return message;
   };
   return {
@@ -38,7 +29,7 @@ window.backend = (function () {
         if (xhr.status === 200) {
           onLoad(xhr.response);
         } else {
-          onError(renderErrorMessage(xhr.status));
+          onError(getErrorMessage(xhr.status));
         }
       });
       xhr.addEventListener('timeout', function () {
@@ -56,7 +47,7 @@ window.backend = (function () {
         if (xhr.status === 200) {
           onLoad('Данные успешно загружены!');
         } else {
-          onError(renderErrorMessage(xhr.status));
+          onError(getErrorMessage(xhr.status));
         }
       });
       xhr.addEventListener('timeout', function () {
