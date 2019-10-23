@@ -2,7 +2,6 @@
 
 window.sort = (function () {
   var wizardsServerData = [];
-  var sortedWizards = [];
 
   var RatingValue = {
     'colorCoat': 5,
@@ -34,17 +33,20 @@ window.sort = (function () {
   };
 
   var renderSortedWizards = function () {
-    sortedWizards = getRating(wizardsServerData.slice()).sort(sortByValue);
+    var sortedWizards = getRating(wizardsServerData.slice()).sort(sortByValue);
     window.render.renderWizards(sortedWizards);
-    return sortedWizards;
   };
 
-  var renderWizardsHandler = function () {
+  var updateWizards = function () {
     var renderedWizards = window.render.wizardsList.querySelectorAll('.setup-similar-item');
     for (var i = 0; i < renderedWizards.length; i++) {
       renderedWizards[i].remove();
     }
     renderSortedWizards();
+  };
+
+  var updateWizardsHandler = function () {
+    window.debounce(updateWizards);
   };
 
   var loadSuccessHandler = function (data) {
@@ -55,9 +57,9 @@ window.sort = (function () {
 
       renderSortedWizards();
 
-      window.setup.wizardCoat.addEventListener('click', renderWizardsHandler);
-      window.setup.wizardEyes.addEventListener('click', renderWizardsHandler);
-      window.setup.wizardFireball.addEventListener('click', renderWizardsHandler);
+      window.setup.wizardCoat.addEventListener('click', updateWizardsHandler);
+      window.setup.wizardEyes.addEventListener('click', updateWizardsHandler);
+      window.setup.wizardFireball.addEventListener('click', updateWizardsHandler);
     } else {
       var errorMessage = 'Некорректный тип данных';
       window.popup.onError(errorMessage);
