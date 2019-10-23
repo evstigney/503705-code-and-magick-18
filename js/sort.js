@@ -12,6 +12,7 @@ window.sort = (function () {
 
   var getRating = function (wizards) {
     wizards.forEach(function (wizard) {
+      wizard.rating = 0;
       for (var key in RatingValue) {
         if (window.setup.mainWizard[key] === wizard[key]) {
           wizard.rating += RatingValue[key];
@@ -21,27 +22,42 @@ window.sort = (function () {
     return wizards;
   };
 
+  var sortByValue = function (a, b) {
+    var result = 0;
+    if (a.rating < b.rating) {
+      result = 1;
+    }
+    if (a.rating > b.rating) {
+      result = -1;
+    }
+    return result;
+  };
+
+  var renderSortedWizards = function () {
+    sortedWizards = getRating(wizardsServerData.slice()).sort(sortByValue);
+    window.render.renderWizards(sortedWizards);
+    return sortedWizards;
+  };
+
+  var renderWizardsHandler = function () {
+    var renderedWizards = window.render.wizardsList.querySelectorAll('.setup-similar-item');
+    for (var i = 0; i < renderedWizards.length; i++) {
+      renderedWizards[i].remove();
+    }
+    renderSortedWizards();
+  };
+
   var loadSuccessHandler = function (data) {
     if (typeof data === 'object') {
       data.forEach(function (element) {
         wizardsServerData.push(element);
-        element.rating = 0;
-        sortedWizards.push(element);
       });
 
-      sortedWizards = getRating(sortedWizards).sort(function (a, b) {
-        var result = 0;
-        if (a.rating < b.rating) {
-          result = 1;
-        }
-        if (a.rating > b.rating) {
-          result = -1;
-        }
-        return result;
-      });
+      renderSortedWizards();
 
-      window.render.renderWizards(sortedWizards);
-
+      window.setup.wizardCoat.addEventListener('click', renderWizardsHandler);
+      window.setup.wizardEyes.addEventListener('click', renderWizardsHandler);
+      window.setup.wizardFireball.addEventListener('click', renderWizardsHandler);
     } else {
       var errorMessage = 'Некорректный тип данных';
       window.popup.onError(errorMessage);
@@ -49,9 +65,4 @@ window.sort = (function () {
   };
 
   window.backend.load(loadSuccessHandler, window.popup.onError);
-
-  return {
-    wizards: wizardsServerData,
-    sortedWizards: sortedWizards
-  };
 })();

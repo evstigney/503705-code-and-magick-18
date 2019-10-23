@@ -32,6 +32,7 @@ window.render = (function () {
   };
 
   return {
+    wizardsList: similarWizardsList,
     renderWizards: renderWizardsInDocument
   };
 })();

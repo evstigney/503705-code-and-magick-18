@@ -54,6 +54,9 @@ window.setup = (function () {
   });
 
   return {
-    mainWizard: mainWizard
+    mainWizard: mainWizard,
+    wizardCoat: setupWizardCoat,
+    wizardEyes: setupWizardEyes,
+    wizardFireball: setupWizardFireball
   };
 })();
