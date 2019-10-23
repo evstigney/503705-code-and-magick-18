@@ -1,17 +1,19 @@
 'use strict';
 
 window.util = (function () {
-  var ENTER_KEYCODE = 13;
-  var ESC_KEYCODE = 27;
+  var KeyCode = {
+    enter: 13,
+    escape: 27
+  };
 
   return {
     isEscEvent: function (evt, action) {
-      if (evt.keyCode === ESC_KEYCODE) {
+      if (evt.keyCode === KeyCode.escape) {
         action();
       }
     },
     isEnterEvent: function (evt, action) {
-      if (evt.keyCode === ENTER_KEYCODE) {
+      if (evt.keyCode === KeyCode.enter) {
         action();
       }
     },

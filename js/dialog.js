@@ -116,6 +116,12 @@ window.dialog = (function () {
     window.util.isEnterEvent(evt, evt.preventDefault());
   });
 
+  setupWizardForm.addEventListener('submit', function (evt) {
+    window.backend.save(new FormData(setupWizardForm), window.popup.onSuccess, window.popup.onError);
+    setupWindow.classList.add('hidden');
+    evt.preventDefault();
+  });
+
   return {
     setup: setupWindow,
     setupForm: setupWizardForm

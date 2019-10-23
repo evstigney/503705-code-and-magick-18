@@ -3,7 +3,7 @@
 window.backend = (function () {
   var URL = 'https://js.dump.academy/code-and-magick';
   var TIMEOUT = 6000;
-  var MAP_ERRORS = {
+  var ErrorCode = {
     400: 'неверный запрос',
     401: 'пользователь не авторизован',
     404: 'ничего не найдено',
@@ -17,7 +17,7 @@ window.backend = (function () {
 
   var getErrorMessage = function (status) {
     var message = 'Ошибка: ';
-    message += MAP_ERRORS[status];
+    message += ErrorCode[status];
     return message;
   };
   return {
