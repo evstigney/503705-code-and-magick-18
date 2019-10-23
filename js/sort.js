@@ -9,24 +9,13 @@ window.sort = (function () {
     'colorEyes': 3,
     'colorFireball': 1
   };
-/*
-  var setRating = function (param) {
-    if (window.setup.mainWizard[param] === wizard[param]) {
-      wizard.rating += RatingValue[param];
-    }
 
-  };
-*/
   var getRating = function (wizards) {
     wizards.forEach(function (wizard) {
-      if (window.setup.mainWizard.colorCoat === wizard.colorCoat) {
-        wizard.rating += 5;
-      }
-      if (window.setup.mainWizard.colorEyes === wizard.colorEyes) {
-        wizard.rating += 3;
-      }
-      if (window.setup.mainWizard.colorFireball === wizard.colorFireball) {
-        wizard.rating += 1;
+      for (var key in RatingValue) {
+        if (window.setup.mainWizard[key] === wizard[key]) {
+          wizard.rating += RatingValue[key];
+        }
       }
     });
     return wizards;
