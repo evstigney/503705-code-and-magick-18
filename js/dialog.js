@@ -29,10 +29,8 @@ window.dialog = (function () {
     if (!wizard) {
       renderWaitBlock();
     }
-    var setupWindowPosition = {
-      x: setupWindow.offsetLeft,
-      y: setupWindow.offsetTop
-    };
+    var setupWindowPosition = new window.Coordinate(setupWindow.offsetLeft, setupWindow.offsetTop);
+
     if (isOpenForFirstTime) {
       setupWindowStartPosition = window.util.cloneObj(setupWindowPosition);
     } else {
@@ -49,17 +47,11 @@ window.dialog = (function () {
   dialogHandle.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
     var dragged = false;
-    var startCoords = {
-      x: evt.clientX,
-      y: evt.clientY
-    };
+    var startCoords = new window.Coordinate(evt.clientX, evt.clientY);
     var onMouseMove = function (moveEvt) {
       moveEvt.preventDefault();
       dragged = true;
-      var shift = {
-        x: startCoords.x - moveEvt.clientX,
-        y: startCoords.y - moveEvt.clientY
-      };
+      var shift = new window.Coordinate(startCoords.x - moveEvt.clientX, startCoords.y - moveEvt.clientY);
       startCoords = {
         x: moveEvt.clientX,
         y: moveEvt.clientY
